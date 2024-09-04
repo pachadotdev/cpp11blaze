@@ -1,0 +1,31 @@
+Package: cpp11blazetest
+Type: Package
+Title: Testing cpp11blaze
+Version: 0.1
+Authors@R: c(
+    person(
+        given = "Mauricio",
+        family = "Vargas Sepulveda",
+        role = c("aut", "cre"),
+        email = "m.sepulveda@mail.utoronto.ca",
+        comment = c(ORCID = "0000-0003-1017-7574"))
+    )
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Depends: R(>= 3.5.0)
+Description: Testing cpp11blaze. I run this within a tiny package to test
+    the compiled code.
+License: Apache License (>= 2)
+BugReports: https://github.com/pachadotdev/cpp11blaze/issues
+URL: https://github.com/pachadotdev/cpp11blaze
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+NeedsCompilation: yes
+VignetteBuilder: knitr
+LinkingTo: cpp11, cpp11blaze
+Config/testthat/edition: 3
+LazyData: true
+Remotes:
+    pachadotdev/cpp11blaze

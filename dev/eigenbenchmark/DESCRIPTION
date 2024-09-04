@@ -1,0 +1,26 @@
+Package: eigenbenchmark
+Type: Package
+Title: Adapted ATT benchmark for Eigen
+Version: 0.1
+Authors@R: c(
+    person(
+        given = "Mauricio",
+        family = "Vargas Sepulveda",
+        role = c("aut", "cre"),
+        email = "m.sepulveda@mail.utoronto.ca",
+        comment = c(ORCID = "0000-0003-1017-7574"))
+    )
+Suggests: 
+    knitr,
+    rmarkdown
+Depends: R(>= 3.5.0)
+Description: Adaptation of the ATT benchmark for variable matrix or vector
+    size in Eigen (C++).
+License: Apache License (>= 2)
+BugReports: https://github.com/pachadotdev/cpp11eigen/issues
+URL: https://github.com/pachadotdev/cpp11eigen
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+NeedsCompilation: yes
+VignetteBuilder: knitr
+LinkingTo: cpp11, cpp11eigen

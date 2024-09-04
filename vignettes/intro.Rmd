@@ -1,0 +1,139 @@
+---
+title: "Introduction to 'cpp11blaze'"
+output: rmarkdown::html_vignette
+bibliography: "references.bib"
+vignette: >
+  %\VignetteIndexEntry{Introduction to 'cpp11blaze'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Motivations
+
+The development of cpp11blaze emerges from the desire to follow a simplified
+approach towards R and C++ integration by building on top of 
+[cpp11](https://cran.r-project.org/package=cpp11), a ground up rewrite of C++
+bindings to R with different design trade-offs and features. cpp11blaze
+aims at providing an additional layer to put the end-user focus on the
+computation instead of configuration [@cpp11].
+
+[blaze](https://blaze.tuxfamily.org/index.php?title=Main_Page) is a linear
+algebra library for the C++ language, aiming towards a good balance between
+speed and ease of use. It is justified in the fact that C++, in its current
+form, is very valuable to address bottlenecks that we find with interpreted
+languages such as R and Python but it does not provide data structures nor
+functions for linear algebra [@Sanderson2016].
+
+[Rcppblaze](https://cran.r-project.org/package=Rcppblaze) was first
+published to CRAN in 2011, and it allows to use blaze via
+[Rcpp](https://cran.r-project.org/package=Rcpp), a widely extended R package
+to call C++ functions from R [@Eddelbuettel2014].
+
+# Design choices
+
+The design choices in cpp11blaze are:
+
+- Providing a simpler implementation that makes the library easier to
+  understand, maintain, and extend, benefiting both current users and future
+  contributors.
+- Offering a completely header-only approach, eliminating Application Binary
+  Interface compatibility issues and simplifying library integration and
+  distribution.
+- Facilitating vendoring, which allows for the inclusion of the library
+  directly in projects, thus simplifying dependency management and distribution.
+
+These ideas reflect a comprehensive effort to provide an efficient interface for
+integrating C++ and R that aligns with the Tidy philosophy [@Wickham2019],
+addressing both the technical and community-driven aspects that influence
+software evolution.
+
+These choices have advantages and disadvantages. A disadvantage is that
+cpp11blaze will not convert data types automatically, the user must be
+explicit about data types, especially when passing data from R to C++ and then
+exporting the final computation back to R. An advantage is that cpp11blaze
+codes, including its internal templates, can be adapted to work with Python
+via [pybind11](https://pybind11.readthedocs.io/en/stable/index.html)
+[@pybind11].
+
+cpp11blaze uses @Hansen2022 notation, meaning that matrices are column-major
+and vectors are expressed as column vectors (i.e., $N\times1$ matrices).
+
+# Examples
+
+Convention: input R matrices are denoted by `x`, `y`, `z`, and output or
+intermediate C++ matrices are denoted by `X`, `Y`, `Z`. The example functions can
+be called from R scripts and should have proper headers as in the following
+code:
+
+```cpp
+#include <cpp11.hpp>
+#include <cpp11blaze.hpp>
+
+using namespace blaze;
+using namespace cpp11;
+
+[[cpp11::register]] // allows using the function in R
+doubles_matrix<> solve_mat(doubles_matrix<> x) {
+  MatrixXd Y = as_Matrix(x); // convert from R to C++
+  MatrixXd Yinv = Y.inverse(); // Y^(-1)
+  return as_doubles_matrix(Yinv); // convert from C++ to R
+}
+```
+
+This example includes the blaze, cpp11 and cpp11blaze libraries, and
+allows interfacing C++ with R (i.e., the `#include <cpp11.hpp>`). It also loads
+the corresponding namespaces (i.e., the `using namespace cpp11`) in order to
+simplify the notation (i.e., using `MatrixXd` instead of `blaze::MatrixXd`).
+
+The `as_Matrix()` function is provided by cpp11blaze to pass a `matrix` object
+from R to C++ and that blaze can read.
+
+The `as_doubles_matrix()` function is also provided by cpp11blaze to pass a
+`MatrixXd` object from C++ to R.
+
+## Ordinary Least Squares
+
+Given a design matrix $X$ and and outcome vector $y$, one function to obtain the
+OLS estimator $\hat{\beta} = (X^tX)^{-1}(X^tY)$ as a matrix (i.e., column
+vector) is:
+
+```cpp
+MatrixXd ols_(const doubles_matrix<>& y, const doubles_matrix<>& x) {
+  MatrixXd Y = as_Matrix(y);  // Col<double> Y = as_Col(y); also works
+  MatrixXd X = as_Matrix(x);
+
+  MatrixXd XtX = X.transpose() * X;        // X'X
+  MatrixXd XtX_inv = XtX.inverse();        // (X'X)^(-1)
+  MatrixXd beta = XtX_inv * X.transpose() * Y;  // (X'X)^(-1)(X'Y)
+
+  return beta;
+}
+
+[[cpp11::register]] doubles_matrix<> ols_mat(const doubles_matrix<>& y,
+                                             const doubles_matrix<>& x) {
+  MatrixXd beta = ols_(y, x);
+  return as_doubles_matrix(beta);
+}
+```
+
+The `ols_mat()` function receives inputs from R and calls `ols_()` to do the
+computation on C++ side. The use of `const` and `&` are specific to the C++
+language and allow to pass data from R to C++ while avoiding copying the data,
+therefore saving time and memory.
+
+The `ols_dbl()` function does the same but returns a vector instead of a matrix.
+
+# Additional Examples
+
+The package repository includes the directory `cpp11blazetest`, which
+contains an R package that uses blaze, and that provides additional examples
+for blazevalues, Cholesky and QR decomposition, and linear models.
+
+# References

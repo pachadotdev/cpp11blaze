@@ -1,0 +1,9 @@
+// cpp11eigen version: 0.2.0
+// vendored on: 2024-09-02
+#include "Core"
+#include "LU"
+#include "Cholesky"
+#include "QR"
+#include "SVD"
+#include "Geometry"
+#include "Eigenvalues"
