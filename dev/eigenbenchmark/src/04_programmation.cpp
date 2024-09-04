@@ -13,10 +13,16 @@
   double phi = 1.6180339887498949;
   VectorXd a =
       (VectorXd::Random(n) * 1000).unaryExpr([](double x) { return std::floor(x); });
+
   VectorXd b(n);
+
+#ifdef _OPENMP
+#pragma omp parallel for schedule(static)
+#endif
   for (int i = 0; i < n; ++i) {
     b(i) = (pow(phi, a(i)) - pow(-phi, -a(i))) / sqrt(5);
   }
+
   return 0;
 }
 
@@ -24,11 +30,16 @@
 
 [[cpp11::register]] int programmation_02_eigen_(const int& n) {
   MatrixXd a(n, n);
+
+#ifdef _OPENMP
+#pragma omp parallel for collapse(2) schedule(static)
+#endif
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < n; ++j) {
       a(i, j) = 1.0 / (i + j + 1);
     }
   }
+  
   return 0;
 }
 
@@ -45,12 +56,19 @@ int gcd(int a, int b) {
 [[cpp11::register]] int programmation_03_eigen_(const int& n) {
   VectorXd a =
       (VectorXd::Random(n) * 1000).unaryExpr([](double x) { return std::ceil(x); });
+
   VectorXd b =
       (VectorXd::Random(n) * 1000).unaryExpr([](double x) { return std::ceil(x); });
+  
   VectorXd c(n);
+  
+#ifdef _OPENMP
+#pragma omp parallel for schedule(static)
+#endif
   for (int i = 0; i < n; ++i) {
     c(i) = gcd(a(i), b(i));  // gcd is a recursive function
   }
+
   return 0;
 }
 
@@ -58,11 +76,16 @@ int gcd(int a, int b) {
 
 [[cpp11::register]] int programmation_04_eigen_(const int& n) {
   MatrixXd a(n, n);
+
+#ifdef _OPENMP
+#pragma omp parallel for collapse(2) schedule(static)
+#endif
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < n; ++j) {
       a(i, j) = abs(i - j) + 1;
     }
   }
+  
   return 0;
 }
 

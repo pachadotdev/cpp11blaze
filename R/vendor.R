@@ -81,12 +81,6 @@ cpp_vendor <- function(dir = NULL, subdir = "/inst/include") {
   )
 
   dir.create(
-    file.path(path, "unsupported"),
-    recursive = TRUE,
-    showWarnings = FALSE
-  )
-
-  dir.create(
     file.path(path, "wrappers"),
     recursive = TRUE,
     showWarnings = FALSE
@@ -95,12 +89,6 @@ cpp_vendor <- function(dir = NULL, subdir = "/inst/include") {
   current_blaze <- system.file(
     "include",
     "blaze",
-    package = "cpp11blaze"
-  )
-
-  current_unsupported <- system.file(
-    "include",
-    "unsupported",
     package = "cpp11blaze"
   )
 
@@ -129,12 +117,6 @@ cpp_vendor <- function(dir = NULL, subdir = "/inst/include") {
 
   copy_files(
     list.files(current_blaze, full.names = TRUE, include.dirs = TRUE,
-      recursive = TRUE),
-    path, blaze_header
-  )
-
-  copy_files(
-    list.files(current_unsupported, full.names = TRUE, include.dirs = TRUE,
       recursive = TRUE),
     path, blaze_header
   )

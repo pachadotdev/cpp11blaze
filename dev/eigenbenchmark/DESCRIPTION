@@ -17,10 +17,9 @@ Depends: R(>= 3.5.0)
 Description: Adaptation of the ATT benchmark for variable matrix or vector
     size in Eigen (C++).
 License: Apache License (>= 2)
-BugReports: https://github.com/pachadotdev/cpp11eigen/issues
-URL: https://github.com/pachadotdev/cpp11eigen
+BugReports: https://github.com/pachadotdev/cpp11blaze/issues
+URL: https://github.com/pachadotdev/cpp11blaze
 RoxygenNote: 7.3.1
 Encoding: UTF-8
 NeedsCompilation: yes
 VignetteBuilder: knitr
-LinkingTo: cpp11, cpp11eigen
