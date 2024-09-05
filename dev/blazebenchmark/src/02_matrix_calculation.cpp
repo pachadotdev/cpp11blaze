@@ -9,7 +9,7 @@
 
 // Creation, transposition, deformation of an NxN matrix
 
-[[cpp11::register]] int matrix_calculation_01_arma_(const int& n) {
+[[cpp11::register]] int matrix_calculation_01_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -30,7 +30,7 @@
 
 // NxN normal distributed random matrix^1000
 
-[[cpp11::register]] int matrix_calculation_02_arma_(const int& n) {
+[[cpp11::register]] int matrix_calculation_02_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -50,7 +50,7 @@
 
 // Sorting of N random values
 
-[[cpp11::register]] int matrix_calculation_03_arma_(const int& n) {
+[[cpp11::register]] int matrix_calculation_03_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicVector<double, columnVector> a(n);
@@ -69,7 +69,7 @@
 
 // NxN cross-product matrix
 
-[[cpp11::register]] int matrix_calculation_04_arma_(const int& n) {
+[[cpp11::register]] int matrix_calculation_04_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -90,7 +90,7 @@
 
 // Linear regression over an NxN matrix
 
-[[cpp11::register]] int matrix_calculation_05_arma_(const int& n) {
+[[cpp11::register]] int matrix_calculation_05_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> x(n, n);

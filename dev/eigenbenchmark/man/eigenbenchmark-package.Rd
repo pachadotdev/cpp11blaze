@@ -11,8 +11,8 @@ Adaptation of the ATT benchmark for variable matrix or vector size in Eigen (C++
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/pachadotdev/cpp11eigen}
-  \item Report bugs at \url{https://github.com/pachadotdev/cpp11eigen/issues}
+  \item \url{https://github.com/pachadotdev/cpp11blaze}
+  \item Report bugs at \url{https://github.com/pachadotdev/cpp11blaze/issues}
 }
 
 }

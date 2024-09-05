@@ -11,10 +11,8 @@ using namespace cpp11;
 
 std::mt19937& random_normal();
 
-template <typename T>
-DynamicVector<T, columnVector> linspace(T start, T end, std::size_t num);
+blaze::DynamicMatrix<double> cor(const blaze::DynamicMatrix<double>& x);
 
-DynamicMatrix<double> cor(const DynamicMatrix<double>& x);
-
-DynamicMatrix<double> hstack(const DynamicMatrix<double>& A,
-                             const DynamicMatrix<double>& B);
+blaze::DynamicMatrix<double, blaze::columnMajor> hstack(
+    const blaze::DynamicMatrix<double, blaze::columnMajor>& A,
+    const blaze::DynamicMatrix<double, blaze::columnMajor>& B);

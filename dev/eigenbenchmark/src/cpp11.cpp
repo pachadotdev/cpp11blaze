@@ -110,17 +110,9 @@ extern "C" SEXP _eigenbenchmark_programmation_05_eigen_(SEXP n) {
     return cpp11::as_sexp(programmation_05_eigen_(cpp11::as_cpp<cpp11::decay_t<const int&>>(n)));
   END_CPP11
 }
-// 05_balassa_index.cpp
-doubles_matrix<> balassa_eigen_(const doubles_matrix<>& x);
-extern "C" SEXP _eigenbenchmark_balassa_eigen_(SEXP x) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(balassa_eigen_(cpp11::as_cpp<cpp11::decay_t<const doubles_matrix<>&>>(x)));
-  END_CPP11
-}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_eigenbenchmark_balassa_eigen_",               (DL_FUNC) &_eigenbenchmark_balassa_eigen_,               1},
     {"_eigenbenchmark_matrix_calculation_01_eigen_", (DL_FUNC) &_eigenbenchmark_matrix_calculation_01_eigen_, 1},
     {"_eigenbenchmark_matrix_calculation_02_eigen_", (DL_FUNC) &_eigenbenchmark_matrix_calculation_02_eigen_, 1},
     {"_eigenbenchmark_matrix_calculation_03_eigen_", (DL_FUNC) &_eigenbenchmark_matrix_calculation_03_eigen_, 1},

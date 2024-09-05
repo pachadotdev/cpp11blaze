@@ -13,11 +13,6 @@
   double phi = 1.6180339887498949;
   vec a = floor(randu<vec>(n) * 1000);
   vec b(n);
-<<<<<<< HEAD
-  for (int i = 0; i < n; ++i) {
-    b(i) = (pow(phi, a(i)) - pow(-phi, -a(i))) / sqrt(5);
-  }
-=======
 
 #ifdef _OPENMP
 #pragma omp parallel for schedule(static)
@@ -26,7 +21,6 @@
     b(i) = (pow(phi, a(i)) - pow(-phi, -a(i))) / sqrt(5);
   }
 
->>>>>>> ab74add (add blaze benchmark funs)
   return 0;
 }
 
@@ -34,22 +28,15 @@
 
 [[cpp11::register]] int programmation_02_arma_(const int& n) {
   mat a(n, n);
-<<<<<<< HEAD
-=======
 
 #ifdef _OPENMP
 #pragma omp parallel for collapse(2) schedule(static)
 #endif
->>>>>>> ab74add (add blaze benchmark funs)
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < n; ++j) {
       a(i, j) = 1.0 / (i + j + 1);
     }
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> ab74add (add blaze benchmark funs)
   return 0;
 }
 
@@ -67,11 +54,6 @@ int gcd(int a, int b) {
   vec a = ceil(randu<vec>(n) * 1000);
   vec b = ceil(randu<vec>(n) * 1000);
   vec c(n);
-<<<<<<< HEAD
-  for (int i = 0; i < n; ++i) {
-    c(i) = gcd(a(i), b(i));  // gcd is a recursive function
-  }
-=======
 
 #ifdef _OPENMP
 #pragma omp parallel for schedule(static)
@@ -80,7 +62,6 @@ int gcd(int a, int b) {
     c(i) = gcd(a(i), b(i));  // gcd is a recursive function
   }
 
->>>>>>> ab74add (add blaze benchmark funs)
   return 0;
 }
 

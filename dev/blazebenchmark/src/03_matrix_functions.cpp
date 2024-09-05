@@ -9,7 +9,7 @@
 
 // FFT over N random values
 
-[[cpp11::register]] int matrix_functions_01_arma_(const int& n) {
+[[cpp11::register]] int matrix_functions_01_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicVector<double, columnVector> a(n);
@@ -21,10 +21,13 @@
     a[i] = d(random_normal());
   }
 
-  fftw_complex* in = reinterpret_cast<fftw_complex*>(a.data());
+  fftw_complex* in =
+      reinterpret_cast<fftw_complex*>(fftw_malloc(sizeof(fftw_complex) * n));
   fftw_complex* out =
       reinterpret_cast<fftw_complex*>(fftw_malloc(sizeof(fftw_complex) * n));
+
   fftw_plan plan = fftw_plan_dft_1d(n, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
   fftw_execute(plan);
 
   DynamicVector<complex<double>, columnVector> b(n);
@@ -33,6 +36,7 @@
   }
 
   fftw_destroy_plan(plan);
+  fftw_free(in);
   fftw_free(out);
 
   return 0;
@@ -40,7 +44,7 @@
 
 // Eigenvalues of an NxX random matrix
 
-[[cpp11::register]] int matrix_functions_02_arma_(const int& n) {
+[[cpp11::register]] int matrix_functions_02_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -62,7 +66,7 @@
 
 // Determinant of an NxN random matrix
 
-[[cpp11::register]] int matrix_functions_03_arma_(const int& n) {
+[[cpp11::register]] int matrix_functions_03_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -82,7 +86,7 @@
 
 // Cholesky decomposition of an NxN matrix
 
-[[cpp11::register]] int matrix_functions_04_arma_(const int& n) {
+[[cpp11::register]] int matrix_functions_04_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);
@@ -96,7 +100,7 @@
     }
   }
 
-  a = a.transpose() * a;
+  a = trans(a) * a;
 
   DynamicMatrix<double, columnMajor> l(a.rows(), a.columns());
   llh(a, l);
@@ -106,7 +110,7 @@
 
 // Inverse of an NxN random matrix
 
-[[cpp11::register]] int matrix_functions_05_arma_(const int& n) {
+[[cpp11::register]] int matrix_functions_05_blaze_(const int& n) {
   std::normal_distribution<double> d(0, 1);
 
   DynamicMatrix<double, columnMajor> a(n, n);

@@ -8,25 +8,6 @@ std::mt19937& random_normal() {
   return gen;
 }
 
-// MATLAB-like linspace
-
-template <typename T>
-DynamicVector<T, columnVector> linspace(T start, T end, std::size_t num) {
-  DynamicVector<T, columnVector> result(num);
-  if (num == 0) {
-    return result;
-  }
-  if (num == 1) {
-    result[0] = start;
-    return result;
-  }
-  T step = (end - start) / (num - 1);
-  for (std::size_t i = 0; i < num; ++i) {
-    result[i] = start + i * step;
-  }
-  return result;
-}
-
 // Correlation
 
 DynamicMatrix<double> cor(const DynamicMatrix<double>& x) {
@@ -45,9 +26,9 @@ DynamicMatrix<double> cor(const DynamicMatrix<double>& x) {
   return R;
 }
 
-DynamicMatrix<double> hstack(const DynamicMatrix<double>& A,
-                             const DynamicMatrix<double>& B) {
-  DynamicMatrix<double> result(A.rows(), A.columns() + B.columns());
+DynamicMatrix<double, columnMajor> hstack(const DynamicMatrix<double, columnMajor>& A,
+  const DynamicMatrix<double, columnMajor>& B) {
+  DynamicMatrix<double, columnMajor> result(A.rows(), A.columns() + B.columns());
   submatrix(result, 0, 0, A.rows(), A.columns()) = A;
   submatrix(result, 0, A.columns(), B.rows(), B.columns()) = B;
   return result;

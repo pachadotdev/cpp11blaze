@@ -59,7 +59,3 @@ programmation_04_eigen_ <- function(n) {
 programmation_05_eigen_ <- function(n) {
   .Call(`_eigenbenchmark_programmation_05_eigen_`, n)
 }
-
-balassa_eigen_ <- function(x) {
-  .Call(`_eigenbenchmark_balassa_eigen_`, x)
-}
