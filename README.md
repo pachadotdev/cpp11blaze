@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cpp11blaze <img src="man/figures/logo.svg" align="right" height="139" alt="" />
+# cpp11blaze
 
 <!-- badges: start -->
 
@@ -11,6 +11,8 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cpp11blaze)](https://CRAN.R-project.org/package=cpp11blaze)
 <!-- badges: end -->
+
+VERY EARLY STAGE PACKAGE\!\!\!
 
 The goal of cpp11blaze is to provide a novel approach to use the [Blaze
 C++ library](https://bitbucket.org/blaze-lib/blaze/src/master/) by using

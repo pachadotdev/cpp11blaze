@@ -1,4 +1,0 @@
-// cpp11eigen version: 0.2.0
-// vendored on: 2024-09-02
-#include "Dense"
-#include "Sparse"

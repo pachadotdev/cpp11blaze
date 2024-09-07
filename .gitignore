@@ -8,13 +8,4 @@ inst/doc
 README.html
 *.o
 *.so
-dev/benchmarks.rds
-dev/benchmarks.r
-dev/benchmarks_cpp11.cpp
 pkgdown
-inst/arxiv_preprint/paper.aux
-inst/arxiv_preprint/paper.idx
-inst/arxiv_preprint/paper.out
-inst/arxiv_preprint/paper.pdf
-inst/arxiv_preprint/paper.toc
-inst/arxiv_preprint/paper.tex

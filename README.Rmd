@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cpp11blaze <img src="man/figures/logo.svg" align="right" height="139" alt="" />
+# cpp11blaze
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/pachadotdev/cpp11blaze/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pachadotdev/cpp11blaze/actions/workflows/R-CMD-check.yaml)
@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 [![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-donate-white.svg)](https://buymeacoffee.com/pacha)
 [![CRAN status](https://www.r-pkg.org/badges/version/cpp11blaze)](https://CRAN.R-project.org/package=cpp11blaze)
 <!-- badges: end -->
+
+VERY EARLY STAGE PACKAGE!!!
 
 The goal of cpp11blaze is to provide a novel approach to use the [Blaze
 C++ library](https://bitbucket.org/blaze-lib/blaze/src/master/) by using the
