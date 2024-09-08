@@ -38,8 +38,7 @@ DynamicVector<std::complex<double>, columnVector> eigen_gen_(const doubles_matri
   return as_complex_doubles(y);
 }
 
-[[cpp11::register]] list
-  eigen_gen_mat_no_wrapper(const doubles_matrix<>& x) {
+[[cpp11::register]] list eigen_gen_mat_no_wrapper(const doubles_matrix<>& x) {
   DynamicVector<std::complex<double>, columnVector> y = eigen_gen_(x);
 
   const size_t n = y.size();

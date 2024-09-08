@@ -48,7 +48,7 @@ extern "C" SEXP _cpp11blazetest_eigen_gen_dbl_complex_wrapper(SEXP x) {
   END_CPP11
 }
 // 02_eigen.cpp
-list   eigen_gen_mat_no_wrapper(const doubles_matrix<>& x);
+list eigen_gen_mat_no_wrapper(const doubles_matrix<>& x);
 extern "C" SEXP _cpp11blazetest_eigen_gen_mat_no_wrapper(SEXP x) {
   BEGIN_CPP11
     return cpp11::as_sexp(eigen_gen_mat_no_wrapper(cpp11::as_cpp<cpp11::decay_t<const doubles_matrix<>&>>(x)));

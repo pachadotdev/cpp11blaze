@@ -25,12 +25,14 @@ inline blaze::DynamicVector<T, blaze::columnVector> as_DynamicVector_(const U& x
 
   blaze::DynamicVector<T, blaze::columnVector> y(n);
 
-#ifdef _OPENMP
-#pragma omp parallel for schedule(static)
-#endif
-  for (size_t i = 0; i < n; ++i) {
-    y[i] = x[i];
-  }
+  using dblint =
+      typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
+
+  dblint* data = nullptr;
+
+  data = reinterpret_cast<dblint*>(x.data());
+
+  std::copy(data, data + n, y.data());
 
   return y;
 }
@@ -58,14 +60,14 @@ inline U DynamicVector_to_dblint_(const blaze::DynamicVector<T, blaze::columnVec
   using dblint = typename std::conditional<std::is_same<U, doubles>::value,
                                            writable::doubles, writable::integers>::type;
 
+  using dblint2 =
+      typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
+
   dblint y(n);
 
-#ifdef _OPENMP
-#pragma omp parallel for schedule(static)
-#endif
-  for (size_t i = 0; i < n; ++i) {
-    y[i] = x[i];
-  }
+  dblint2* data = reinterpret_cast<dblint2*>(x.data());
+
+  std::copy(data, data + n, y.data());
 
   return y;
 }
@@ -91,14 +93,14 @@ inline U DynamicVector_to_dblint_matrix_(
                                 writable::doubles_matrix<>,
                                 writable::integers_matrix<>>::type;
 
+  using dblint =
+      typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
+
   dblint_matrix y(n, m);
 
-#ifdef _OPENMP
-#pragma omp parallel for schedule(static)
-#endif
-  for (int i = 0; i < n; ++i) {
-    y(i, 0) = x[i];
-  }
+  dblint* data = reinterpret_cast<dblint*>(x.data());
+
+  std::copy(data, data + n, y.data());
 
   return y;
 }
@@ -115,7 +117,8 @@ inline integers_matrix<> as_integers_matrix(
 
 // Complex
 
-inline list as_complex_doubles(const blaze::DynamicVector<std::complex<double>, blaze::columnVector>& x) {
+inline list as_complex_doubles(
+    const blaze::DynamicVector<std::complex<double>, blaze::columnVector>& x) {
   const size_t n = x.size();
   blaze::DynamicVector<double, blaze::columnVector> x_real(n);
   blaze::DynamicVector<double, blaze::columnVector> x_imag(n);
@@ -128,7 +131,8 @@ inline list as_complex_doubles(const blaze::DynamicVector<std::complex<double>, 
   return writable::list({"real"_nm = as_doubles(x_real), "imag"_nm = as_doubles(x_imag)});
 }
 
-inline list as_complex_matrix(const blaze::DynamicVector<std::complex<double>, blaze::columnVector>& x) {
+inline list as_complex_matrix(
+    const blaze::DynamicVector<std::complex<double>, blaze::columnVector>& x) {
   const size_t n = x.size();
   blaze::DynamicVector<double, blaze::columnVector> x_real(n);
   blaze::DynamicVector<double, blaze::columnVector> x_imag(n);
