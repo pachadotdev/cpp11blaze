@@ -1,3 +1,7 @@
+# cpp11blaze 0.0.2
+
+* Uses `reinterpret_cast` to copy data from R to C++ and vice versa.
+
 # cpp11blaze 0.0.1
 
 * Initial release. This is a very early version of the package.
