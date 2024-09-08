@@ -26,9 +26,9 @@ inline blaze::DynamicMatrix<T, blaze::columnMajor> dblint_matrix_to_DynamicMatri
   using dblint =
       typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
 
-  dblint* data = nullptr;
+  const dblint* data = nullptr;
 
-  data = reinterpret_cast<dblint*>(x.data());
+  data = reinterpret_cast<const dblint*>(x.data());
 
   std::copy(data, data + n * m, y.data());
 
@@ -44,9 +44,9 @@ inline blaze::DynamicMatrix<T, blaze::columnMajor> dblint_to_DynamicMatrix_(cons
   using dblint =
       typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
 
-  dblint* data = nullptr;
+  const dblint* data = nullptr;
 
-  data = reinterpret_cast<dblint*>(x.data());
+  data = reinterpret_cast<const dblint*>(x.data());
 
   std::copy(data, data + n, y.data());
 
@@ -94,7 +94,7 @@ inline U DynamicMatrix_to_dblint_matrix_(
   using dblint =
       typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
 
-  dblint* data = reinterpret_cast<dblint*>(x.data());
+  const dblint* data = reinterpret_cast<const dblint*>(x.data());
 
   std::copy(data, data + n * m, y.data());
 
@@ -118,7 +118,7 @@ inline U DynamicMatrix_to_dblint_(const blaze::DynamicMatrix<T, blaze::columnMaj
 
   dblint B(n);
 
-  dblint2* data = reinterpret_cast<dblint2*>(A.data());
+  const dblint2* data = reinterpret_cast<const dblint2*>(A.data());
 
   std::copy(data, data + n, B.data());
 
