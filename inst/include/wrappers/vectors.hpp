@@ -28,9 +28,7 @@ inline blaze::DynamicVector<T, blaze::columnVector> as_DynamicVector_(const U& x
   using dblint =
       typename std::conditional<std::is_same<U, doubles>::value, double, int>::type;
 
-  dblint* data = nullptr;
-
-  data = reinterpret_cast<dblint*>(x.data());
+  const dblint* data = reinterpret_cast<const dblint*>(x.data());
 
   std::copy(data, data + n, y.data());
 
@@ -65,7 +63,7 @@ inline U DynamicVector_to_dblint_(const blaze::DynamicVector<T, blaze::columnVec
 
   dblint y(n);
 
-  dblint2* data = reinterpret_cast<dblint2*>(x.data());
+  const dblint2* data = reinterpret_cast<const dblint2*>(x.data());
 
   std::copy(data, data + n, y.data());
 
@@ -98,7 +96,7 @@ inline U DynamicVector_to_dblint_matrix_(
 
   dblint_matrix y(n, m);
 
-  dblint* data = reinterpret_cast<dblint*>(x.data());
+  const dblint* data = reinterpret_cast<const dblint*>(x.data());
 
   std::copy(data, data + n, y.data());
 
