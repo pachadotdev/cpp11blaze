@@ -4,7 +4,7 @@ Title: A 'Blaze' Interface
 Description: Provides function declarations and inline function definitions that
     facilitate communication between R and the 'Blaze' 'C++' library for
     linear algebra and scientific computing.
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person(
         given = "Mauricio",

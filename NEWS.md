@@ -1,6 +1,7 @@
 # cpp11blaze 0.0.2
 
-* Uses `reinterpret_cast` to copy data from R to C++ and vice versa.
+* Uses `reinterpret_cast` to copy data from R to C++.
+* It still uses OMP loops to copy data from C++ to R.
 
 # cpp11blaze 0.0.1
 
