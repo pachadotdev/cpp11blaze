@@ -1,9 +1,9 @@
 ---
-title: "Introduction to 'cpp11blaze'"
+title: "Basic 'cpp11blaze' usage"
 output: rmarkdown::html_vignette
 bibliography: "references.bib"
 vignette: >
-  %\VignetteIndexEntry{Introduction to 'cpp11blaze'}
+  %\VignetteIndexEntry{Basic 'cpp11blaze' usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
